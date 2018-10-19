@@ -37,12 +37,12 @@ _getWeather = (lat, long) =>
   });
 };
   render() {
-    const { isLoaded , error } = this.state;
+    const { isLoaded , error ,temperature , name} = this.state;
     return (
       <View style={styles.container}>
         <StatusBar barStyle="light-content"></StatusBar>
         {isLoaded ? 
-        <Weather/> :
+        <Weather weatherName = {name} temp = {Math.floor(temperature - 273)}/> :
        ( <View style={styles.loading}>
             <Text style={styles.loadingText}>Getting the fucking weather</Text>
             {error ? <Text style={styles.errorText}>{error}</Text> : null}
