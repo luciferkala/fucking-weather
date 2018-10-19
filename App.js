@@ -11,6 +11,7 @@ export default class App extends Component {
     temperature: null,
     name : null
   };
+
   componentDidMount() {
     navigator.geolocation.getCurrentPosition(
       position => {
@@ -23,27 +24,31 @@ export default class App extends Component {
       }
     );
   }
-_getWeather = (lat, long) => 
-{
-  fetch(`http://api.openweathermap.org/data/2.5/weather?lat=${lat}&lon=${long}&APPID=${API_KEY}`
-)
-  .then(response => response.json())
-  .then(json => {
-    this.setState({
-      temperature: json.main.temp,
-      name: json.weather[0].main,
-      isLoaded : true
+
+  _getWeather = (lat, long) => 
+  {
+    fetch(`http://api.openweathermap.org/data/2.5/weather?lat=${lat}&lon=${long}&APPID=${API_KEY}`
+  )
+    .then(response => response.json())
+    .then(json => {
+      this.setState({
+        temperature: json.main.temp,
+        name: json.weather[0].main,
+        isLoaded : true
+      });
     });
-  });
-};
+    console.log(lat,long);
+  };
+
   render() {
     const { isLoaded , error ,temperature , name} = this.state;
     return (
       <View style={styles.container}>
         <StatusBar barStyle="light-content"></StatusBar>
-        {isLoaded ? 
-        <Weather weatherName = {name} temp = {Math.floor(temperature - 273)}/> :
-       ( <View style={styles.loading}>
+        {isLoaded ? (
+        <Weather weatherName = {name} temp = {Math.floor(temperature - 273)}/> 
+      ) : ( 
+        <View style={styles.loading}>
             <Text style={styles.loadingText}>Getting the fucking weather</Text>
             {error ? <Text style={styles.errorText}>{error}</Text> : null}
           </View>
