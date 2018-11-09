@@ -52,6 +52,12 @@ const weatherCases = {
         title: "Fog",
         subtitle: "It's like you have no glasses on" ,
         icons: "weather-fog"
+    },
+    Mist:{
+        colors:["#D7D2CC","#304352"],
+        title: "Fog",
+        subtitle: "It's like you have no glasses on" ,
+        icons: "weather-fog"
     }
 };
 
